@@ -1,0 +1,10 @@
+<h3> List of all the appointments</h3>
+<p>Total of {{ no_of_appointments }} appointments found </p>
+
+<ul>
+    {% for appointment in appointment_list %}
+        <li>{{ appointment.dateTime}}</li>
+
+    {% endfor %}
+
+</ul>

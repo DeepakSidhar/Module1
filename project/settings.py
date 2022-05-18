@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'scheduler.apps.SchedulerConfig', # this is to indicatewe have a  scheduler fdolder and within this we have apps  which scheuler config
+    'scheduler.apps.SchedulerConfig', # this is to indicate we have a  scheduler folder and within this we have apps  which scheuler config
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
