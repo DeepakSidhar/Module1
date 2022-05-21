@@ -1,9 +1,15 @@
 <h3> List of all the appointments</h3>
 <p>Total of {{ no_of_appointments }} appointments found </p>
+<a href="{% url 'appointment_create' %}">Create Appointment</a>
 
 <ul>
     {% for appointment in appointment_list %}
-        <li>{{ appointment.dateTime}}</li>
+        <li>
+            <a href="{% url 'appointment_details' appointment.id %}"
+            >
+            {{ appointment.dateTime}}
+            </a>
+        </li>
 
     {% endfor %}
 

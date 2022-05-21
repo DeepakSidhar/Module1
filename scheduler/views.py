@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.http import Http404
 
 # This is importing the templates files
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Appointment
 
 
@@ -25,7 +25,11 @@ def list_appointments(request):
 
 def appointment_details(request, appointment_id): # This is getting the url request and appointment ID from the url also
 	#TODO get the list of all the appoimtnets from DB
-	if appointment_id < 0 or appointment_id > 20:
-		raise Http404("Appointment doesn't exist")
+	#PK is the primary key
+	appointment = get_object_or_404(Appointment, pk = appointment_id)
+	context = {'appointment': appointment}
+	return render(request, 'scheduler/appointment_details.html', context)
 
-	return HttpResponse("Details of the appointments :  " + str(appointment_id))
+def appointment_create(request): # This is getting the url request  from the url also
+	print('Rendering create appointment')
+	return render(request, 'scheduler/appointment_create.html')

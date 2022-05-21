@@ -58,7 +58,7 @@ class Appointment(models.Model):
 	)
 
 	symptoms = models.CharField(max_length = 500)# This is to ensure we can have multipe String
-	diganosis = models.CharField(max_length = 50)
+	diagnosis = models.CharField(max_length = 50)
 
 
 
