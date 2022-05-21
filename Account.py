@@ -1,3 +1,6 @@
+#import bycrpt
+import bcrypt
+
 class Account:
 	#Attributes of the class
 	username: str
@@ -52,3 +55,14 @@ class Account:
 		       and self.checkPassLower() \
 		       and self.checkPassSpace() \
 		       and self.checkPassSpecial()
+
+	def hashPassword(self):
+		#The below is eenerating a encode bit hash password and salt.
+		hash = bcrypt.hashpw(str.encode(self.password), bcrypt.gensalt())
+		self.password = hash.decode()
+
+	def checkPassword(self, password):
+		return bcrypt.checkpw(str.encode(password), str.encode(self.password))
+
+	def __str__(self):
+		return self.username + '-->' + self.password
