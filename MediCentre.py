@@ -8,7 +8,7 @@ def signup():
 	username = input("Please enter a username  ")
 	password = input("Please enter a password  ")
 	print("Please wait while we perform some checks !!")
-	#Create an account object  called a
+	#Create an account object  run the validate password - Hash the password then  add the account to the database
 	account = Account(username, password)
 	if account.validatePassword():
 		account.hashPassword()
@@ -28,8 +28,6 @@ def login():
 		print("Login Sucessful")
 	else:
 		print("Login credentials don't match ")
-
-
 
 while True:
 	print("Do you need to login or sign up")

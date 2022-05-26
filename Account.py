@@ -1,17 +1,17 @@
-#import bycrpt
+#import bycrpt.
 import bcrypt
 
 class Account:
-	#Attributes of the class
+#Attributes of the class.
 	username: str
 	password: str
 
-	#Constructor taking in the paramters username and passoword and setting the attributes above
+#Constructor taking in the paramters username and passoword and setting the attributes above.
 	def __init__(self, username, password):
 		self.username = username
 		self.password = password
 
-
+#Check the password length is between equal to 8 and abouve characters  but less than  or equale 10.
 	def checkPassLong(self):
 		if len(self.password) >= 8 and len(self.password) <=10 :
 			return True
@@ -19,6 +19,7 @@ class Account:
 			print("Password is not in range")
 			return False
 
+#Check the password provided one upper case.
 	def checkPassUpper(self):
 		for letter in self.password:
 			if letter.isupper():
@@ -26,7 +27,7 @@ class Account:
 		print("No upper case Characters in password:")
 		return False
 
-
+#Check the password provided one lower case.
 	def checkPassLower(self):
 		for letter in self.password:
 			if letter.islower():
@@ -34,6 +35,7 @@ class Account:
 		print("No lower case Characters in password:")
 		return False
 
+#Check the password provided does not contain a space.
 	def checkPassSpace(self):
 		for letter in self.password:
 			if letter == " ":
@@ -42,6 +44,7 @@ class Account:
 
 		return True
 
+#Check the password provided contains a special character.
 	def checkPassSpecial(self):
 		special = ['!', '@', '#', '$', '%', '&', '*']
 		for letter in self.password:
@@ -50,17 +53,21 @@ class Account:
 		print("No special  characters in password:")
 		return False
 
+#This function is envoked by the main MediCentre program when a user is signing up. To ensure the password meet the abouve  requirments.
 	def validatePassword(self):
-		return self.checkPassUpper() \
-		       and self.checkPassLower() \
-		       and self.checkPassSpace() \
-		       and self.checkPassSpecial()
+		return  self.checkPassLong() \
+		and self.checkPassUpper() \
+		and self.checkPassLower() \
+		and self.checkPassSpace() \
+		and self.checkPassSpecial()
 
+#This functuon uses the bcrypt library and  hashes the password  provided by the user
 	def hashPassword(self):
 		#The below is eenerating a encode bit hash password and salt.
 		hash = bcrypt.hashpw(str.encode(self.password), bcrypt.gensalt())
 		self.password = hash.decode()
 
+#This functuon uses the bcrypt library and  checks  the password and hashed password
 	def checkPassword(self, password):
 		return bcrypt.checkpw(str.encode(password), str.encode(self.password))
 

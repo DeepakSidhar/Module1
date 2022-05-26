@@ -17,7 +17,7 @@ def getAccountByUsername(username:str) -> Account:
 def addAccount(account: Account):
 	database.append(account)
 
-
+#print data from the  database
 def printDB():
 	for account in database:
 		print(account)
