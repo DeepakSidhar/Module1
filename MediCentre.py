@@ -25,7 +25,12 @@ def login():
 		print("Please sign up!!")
 	elif account.checkPassword(password):
 		#TODO add OTP
-		print("Login Sucessful")
+		print(f" your token is : {account.genToken()}")
+		token = input("Please enter the one time token:  ")
+		if account.checkToken(token):
+			print("Login Sucessful")
+		else:
+			print(" Token mismatch.")
 	else:
 		print("Login credentials don't match ")
 

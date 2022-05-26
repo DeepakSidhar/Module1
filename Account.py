@@ -1,15 +1,20 @@
 #import bycrpt.
 import bcrypt
+#import pyotp.
+import pyotp
+import base64
 
 class Account:
 #Attributes of the class.
 	username: str
 	password: str
+	token: pyotp.TOTP
 
 #Constructor taking in the paramters username and passoword and setting the attributes above.
 	def __init__(self, username, password):
 		self.username = username
 		self.password = password
+		self.token = pyotp.TOTP(base64.b32encode(b"Hello This is MediCentre" + bytearray(self.username, "ascii")))
 
 #Check the password length is between equal to 8 and abouve characters  but less than  or equale 10.
 	def checkPassLong(self):
@@ -73,3 +78,14 @@ class Account:
 
 	def __str__(self):
 		return self.username + '-->' + self.password
+
+#This functuon uses the one Time Password and generates a token with the username
+	def genToken(self):
+		return self.token.now()
+
+	def checkToken(self, token):
+		return self.token.verify(token)
+
+
+
+
