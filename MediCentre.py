@@ -24,9 +24,11 @@ def login():
 	if account == None:
 		print("Please sign up!!")
 	elif account.checkPassword(password):
-		#TODO add OTP
+		#Generating the token for the user
 		print(f" your token is : {account.genToken()}")
-		token = input("Please enter the one time token:  ")
+		#Remove any space entered by the user
+		token = input("Please enter the one time token:  ").strip()
+		#IF the token match  by calling checkToken function then we grant access
 		if account.checkToken(token):
 			print("Login Sucessful")
 		else:

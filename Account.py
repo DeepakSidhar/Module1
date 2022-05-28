@@ -1,7 +1,8 @@
-#import bycrpt.
+#import bycrpt.Kislyuk(n.d.)
 import bcrypt
-#import pyotp.
+#import pyotp. bcrypt 3.2.2 (May 02, 2022)
 import pyotp
+#import base64.How to Base64 Encode a String in Python (July 21. 2021)
 import base64
 
 class Account:
@@ -10,10 +11,11 @@ class Account:
 	password: str
 	token: pyotp.TOTP
 
-#Constructor taking in the paramters username and passoword and setting the attributes above.
+#Constructor taking in the paramters username, password and token and setting the attributes above.
 	def __init__(self, username, password):
 		self.username = username
 		self.password = password
+		#Make use of base64 to handle type error.
 		self.token = pyotp.TOTP(base64.b32encode(b"Hello This is MediCentre" + bytearray(self.username, "ascii")))
 
 #Check the password length is between equal to 8 and abouve characters  but less than  or equale 10.
@@ -58,7 +60,7 @@ class Account:
 		print("No special  characters in password:")
 		return False
 
-#This function is envoked by the main MediCentre program when a user is signing up. To ensure the password meet the abouve  requirments.
+#This function is envoked by the main MediCentre program when a user is signing up. To ensure the password meet the abouve requirments.
 	def validatePassword(self):
 		return  self.checkPassLong() \
 		and self.checkPassUpper() \
@@ -68,7 +70,7 @@ class Account:
 
 #This functuon uses the bcrypt library and  hashes the password  provided by the user
 	def hashPassword(self):
-		#The below is eenerating a encode bit hash password and salt.
+		#The below is generating hash password and salt.
 		hash = bcrypt.hashpw(str.encode(self.password), bcrypt.gensalt())
 		self.password = hash.decode()
 
@@ -83,6 +85,7 @@ class Account:
 	def genToken(self):
 		return self.token.now()
 
+#This functuon verfies the one Time Password
 	def checkToken(self, token):
 		return self.token.verify(token)
 
